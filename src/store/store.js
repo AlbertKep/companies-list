@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
   },
   mutations: {
     getCompanies(state, payload) {
-      state.companies = payload.mergedCompaniesAndIncomes;
+      state.companies = payload.mergeCompaniesAndIncomes;
       state.allCompanies = payload.incomes;
     }
   },
@@ -52,24 +52,24 @@ export const store = new Vuex.Store({
             });
           });
 
-          let mergedCompaniesAndIncomes = [];
+          let mergeCompaniesAndIncomes = [];
 
           for (let i = 0; i < companies.length; i++) {
-            mergedCompaniesAndIncomes.push({
+            mergeCompaniesAndIncomes.push({
               ...companies[i],
               ...incomes.find(income => income.id === companies[i].id)
             });
           }
 
-          commit("getCompanies", { mergedCompaniesAndIncomes, incomes });
+          commit("getCompanies", { mergeCompaniesAndIncomes, incomes });
         });
     }
   },
   getters: {
-    // totalIncomes(state) {
-    //   state.incomes.forEach(income => {
-    //   });
-    //   return state.incomes;
-    // }
+    sortCompaniesDescending(state) {
+      return state.companies.sort((a, b) => {
+        return b.totalIncome - a.totalIncome;
+      });
+    }
   }
 });
