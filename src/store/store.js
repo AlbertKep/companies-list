@@ -74,8 +74,8 @@ export const store = new Vuex.Store({
   },
   getters: {
     sortCompaniesDescending(state) {
-      return state.companies.sort((a, b) => {
-        return b.totalIncome - a.totalIncome;
+      return state.companies.sort((companyOne, companyTwo) => {
+        return companyTwo.totalIncome - companyOne.totalIncome;
       });
     },
     filteredCompanies: (state, getters) => {

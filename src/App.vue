@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   height: auto;
+  background: #4e4cb8;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -17,7 +18,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #fff;
-  background: #3d3935;
-  background: linear-gradient(343deg, #3d3935 23%, #53936c 69%);
 }
 </style>

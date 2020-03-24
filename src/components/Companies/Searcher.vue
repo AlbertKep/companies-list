@@ -7,7 +7,6 @@
         type="text"
         class="searcher-container__input"
       />
-      {{ search }}
     </form>
   </div>
 </template>
