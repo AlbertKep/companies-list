@@ -8,12 +8,16 @@ export const store = new Vuex.Store({
   state: {
     companies: [],
     incomes: [],
-    allCompanies: []
+    filteredCompanies: [],
+    searchCompany: ""
   },
   mutations: {
     getCompanies(state, payload) {
       state.companies = payload.mergeCompaniesAndIncomes;
       state.allCompanies = payload.incomes;
+    },
+    searchCompany(state, payload) {
+      state.searchCompany = payload;
     }
   },
   actions: {
@@ -63,6 +67,9 @@ export const store = new Vuex.Store({
 
           commit("getCompanies", { mergeCompaniesAndIncomes, incomes });
         });
+    },
+    searchCompany({ commit }, payload) {
+      commit("searchCompany", payload);
     }
   },
   getters: {
@@ -70,6 +77,17 @@ export const store = new Vuex.Store({
       return state.companies.sort((a, b) => {
         return b.totalIncome - a.totalIncome;
       });
+    },
+    filteredCompanies: (state, getters) => {
+      if (!state.searchCompany) {
+        return getters.sortCompaniesDescending;
+      } else {
+        return getters.sortCompaniesDescending.filter(company => {
+          return company.name
+            .toLowerCase()
+            .includes(state.searchCompany.toLowerCase());
+        });
+      }
     }
   }
 });

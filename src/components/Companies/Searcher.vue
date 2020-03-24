@@ -1,7 +1,13 @@
 <template>
   <div class="searcher-container">
     <form class="searcher-container__form">
-      <input v-model="search" type="text" class="searcher-container__input" />
+      <input
+        v-on:input="searchCompany($event, search)"
+        placeholder="Search Company!"
+        type="text"
+        class="searcher-container__input"
+      />
+      {{ search }}
     </form>
   </div>
 </template>
@@ -9,12 +15,18 @@
 export default {
   data() {
     return {
-      search: "Search Company!"
+      search: ""
     };
   },
   computed: {
     companies() {
       return this.$store.getters.sortCompaniesDescending;
+    }
+  },
+  methods: {
+    searchCompany(event) {
+      this.search = event.target.value;
+      this.$store.dispatch("searchCompany", this.search);
     }
   }
 };
@@ -30,7 +42,10 @@ export default {
     border: none;
     border-bottom: 2px solid #fff;
     caret-color: #fff;
-    color: #ffffff6c;
+    color: #bdb8b8c0;
+  }
+  ::placeholder {
+    color: #bdb8b8c0;
   }
 }
 </style>

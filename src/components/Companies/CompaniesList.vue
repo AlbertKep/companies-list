@@ -26,8 +26,11 @@ export default {
     return {};
   },
   computed: {
+    // companies() {
+    //   return this.$store.getters.sortCompaniesDescending;
+    // },
     companies() {
-      return this.$store.getters.sortCompaniesDescending;
+      return this.$store.getters.filteredCompanies;
     }
   },
   methods: {},
