@@ -1,19 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import CompaniesList from "../views/CompaniesList.vue";
+
+import CompaniesList from "@/views/CompaniesList";
+import TheCompany from "@/views/TheCompany";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "CompaniesList",
+    path: "/companies",
+    name: "Companies",
     component: CompaniesList
   },
   {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue")
+    path: "/companies/:id",
+    name: "Company",
+    component: TheCompany,
+    beforeEnter: (to, from, next) => {
+      to.params.id.length > 3 ? next({ name: "Companies" }) : next();
+    }
+  },
+  {
+    path: "/companies/*",
+    redirect: "/companies",
+    component: CompaniesList
   }
 ];
 

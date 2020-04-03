@@ -12,7 +12,7 @@ import Searcher from "@/components/Companies/Searcher.vue";
 import CompaniesList from "@/components/Companies/CompaniesList.vue";
 
 export default {
-  name: "Home",
+  name: "Companies",
   components: {
     "app-header": Header,
     "app-searcher": Searcher,
@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .companies-list {
-  height: 100%;
+  height: 100vh;
+  background: #4e4cb8;
 }
 </style>

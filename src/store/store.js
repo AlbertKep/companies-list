@@ -51,8 +51,10 @@ export const store = new Vuex.Store({
           });
           incomes.forEach(el => {
             el.totalIncome = 0;
+            el.averageIncome = 0;
             el.incomes.map(income => {
               el.totalIncome += parseInt(income.value);
+              el.averageIncome += parseInt(income.value) / incomes.length;
             });
           });
 

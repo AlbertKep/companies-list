@@ -8,32 +8,34 @@
       <span>Total Income</span>
     </div>
     <ul class="companies-list-container__items">
-      <li
+      <router-link
+        tag="li"
         v-for="company in paginationCompanies"
         :key="company.id"
+        :to="`/companies/${company.id}`"
         class="companies-list-container__item"
       >
         <span>{{ company.id }}</span
         ><span>{{ company.name }}</span
         ><span>{{ company.city }}</span
         ><span>{{ company.totalIncome }}</span>
-      </li>
+      </router-link>
     </ul>
     <div class="pagination-container">
       <button
         @click="prevPage"
-        :disabled="pagination.prevButtonDisabled"
+        :disabled="prevButtonDisabled"
         class="pagination-container__button"
-        :class="{ disabled: pagination.prevButtonDisabled }"
+        :class="{ disabled: prevButtonDisabled }"
       >
         Prev
       </button>
 
       <button
         @click="nextPage"
-        :disabled="pagination.nextButtonDisabled"
+        :disabled="nextButtonDisabled"
         class="pagination-container__button"
-        :class="{ disabled: pagination.nextButtonDisabled }"
+        :class="{ disabled: nextButtonDisabled }"
       >
         Next
       </button>
@@ -44,12 +46,10 @@
 export default {
   data() {
     return {
-      pagination: {
-        currentPage: 0,
-        lastPage: 10,
-        prevButtonDisabled: false,
-        nextButtonDisabled: false
-      }
+      currentPage: 0,
+      lastPage: 10,
+      prevButtonDisabled: true,
+      nextButtonDisabled: false
     };
   },
   computed: {
@@ -57,31 +57,39 @@ export default {
       return this.$store.getters.filteredCompanies;
     },
     paginationCompanies() {
-      return this.companies.slice(
-        this.pagination.currentPage,
-        this.pagination.lastPage
-      );
+      return this.companies.slice(this.currentPage, this.lastPage);
     },
     companiesLength() {
       return this.companies.length;
     }
   },
+  watch: {
+    currentPage() {
+      if (this.currentPage === 0) {
+        this.prevButtonDisabled = true;
+      } else {
+        this.prevButtonDisabled = false;
+      }
+    },
+    lastPage() {
+      if (this.lastPage === this.companies.length) {
+        this.nextButtonDisabled = true;
+      } else {
+        this.nextButtonDisabled = false;
+      }
+    }
+  },
   methods: {
     prevPage() {
-      if (this.pagination.currentPage <= 0) {
-        this.pagination.prevButtonDisabled = true;
-        return;
-      }
-      this.pagination.currentPage -= 10;
-      this.pagination.lastPage -= 10;
+      this.currentPage -= 10;
+      this.lastPage -= 10;
     },
     nextPage() {
-      if (this.pagination.lastPage >= this.companies.length) {
-        this.pagination.nextButtonDisabled = true;
-        return;
-      }
-      this.pagination.currentPage += 10;
-      this.pagination.lastPage += 10;
+      this.currentPage += 10;
+      this.lastPage += 10;
+    },
+    goToCompany(id) {
+      this.$router.push(`/${id}`);
     }
   },
   mounted() {
@@ -109,6 +117,11 @@ export default {
     list-style-type: none;
     display: grid;
     grid-template-columns: 10% repeat(3, 30%);
+    &:hover {
+      background: #fff;
+      color: #4e4cb8;
+      cursor: pointer;
+    }
   }
   &__item span {
     padding: 1em 0;
@@ -124,10 +137,15 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   &__button {
+    background: #4e4cb8;
     color: #fff;
     padding: 0.5em 2em;
-    border: none;
-    cursor: pointer;
+    border: 1px solid;
+    &:hover {
+      background: #fff;
+      color: #4e4cb8;
+      cursor: pointer;
+    }
   }
 }
 .disabled {
