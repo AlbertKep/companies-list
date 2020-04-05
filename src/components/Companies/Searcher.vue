@@ -47,4 +47,25 @@ export default {
     color: #bdb8b8c0;
   }
 }
+@media only screen and (min-width: 425px) {
+  .searcher-container {
+    &__input {
+      font-size: 0.9em;
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .searcher-container {
+    &__input {
+      font-size: 1em;
+    }
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .searcher-container {
+    &__input {
+      font-size: 1.2em;
+    }
+  }
+}
 </style>

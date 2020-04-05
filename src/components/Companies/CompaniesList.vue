@@ -151,4 +151,40 @@ export default {
 .disabled {
   display: none;
 }
+
+@media only screen and (min-width: 425px) {
+  .companies-list-container {
+    &__properties span {
+      font-size: 0.9em;
+    }
+    &__item span {
+      font-size: 0.6em;
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .companies-list-container {
+    &__properties span {
+      font-size: 1em;
+    }
+    &__item span {
+      font-size: 0.7em;
+    }
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .companies-list-container {
+    &__properties span {
+      font-size: 1.2em;
+    }
+    &__item span {
+      font-size: 0.9em;
+    }
+  }
+  .pagination-container {
+    &__button {
+      font-size: 1em;
+    }
+  }
+}
 </style>

@@ -1,23 +1,42 @@
 <template>
   <div class="company">
+    <h1 class="company__name">{{ company.name }}</h1>
     <div class="company__details">
-      <h1 class="company__name">{{ company.name }}</h1>
-
       <p>
-        <span>id:</span>
-        <span>{{ company.id }}</span>
+        <span class="company__properties">id:</span>
+        <span class="company__value">{{ company.id }}</span>
       </p>
-      <p>city:{{ company.city }}</p>
-      <p>Total Income: {{ totalIncome }}</p>
-      <p>Average Income: {{ averageIncome }}</p>
-      <v-date-picker
-        v-model="dates"
-        :value="dates"
-        mode="range"
-        color="purple"
-        :masks="{ input: 'DD/MM/YY' }"
-        :placeholder="dates"
-      ></v-date-picker>
+      <p>
+        <span class="company__properties">city:</span>
+        <span class="company__value">{{ company.city }}</span>
+      </p>
+      <p>
+        <span class="company__properties">total income:</span>
+        <span class="company__value">{{ totalIncome }}</span>
+      </p>
+      <p>
+        <span class="company__properties">average income:</span>
+        <span class="company__value">{{ averageIncome }}</span>
+      </p>
+      <div class="company__date-picker">
+        <label for="dates">Select Date Range:</label>
+        <v-date-picker
+          v-model="dates"
+          :value="dates"
+          is-dark
+          mode="range"
+          color="purple"
+          :masks="{ input: 'DD/MM/YY' }"
+          :placeholder="dates"
+          class="company__date-picker"
+        ></v-date-picker>
+      </div>
+    </div>
+    <div class="company__chart">
+      <h1>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis quo in
+        laudantium repellendus delectus recusandae impedit explicabo quidem, eos
+      </h1>
     </div>
   </div>
 </template>
@@ -53,7 +72,7 @@ export default {
     },
     averageIncome() {
       if (this.selectedRange.length === 0) {
-        return this.company.totalIncome / 50;
+        return Math.floor(this.company.totalIncome / 50);
       } else {
         return Math.floor(this.totalIncome / this.selectedRange.length);
       }
@@ -108,20 +127,57 @@ export default {
   &__name {
     padding: 2em 1em;
   }
-
+  &__details {
+    width: 80%;
+    margin: auto;
+  }
   &__details > p {
     font-size: 1.2em;
-    padding: 0.5em 1em;
+    padding: 0.6em;
     text-align: left;
     border-bottom: 1px solid #fff;
   }
-  &__details > span {
-    display: block;
+  &__properties {
+    display: inline-block;
     padding-right: 0.5em;
   }
   &__date-picker {
-    color: #4e4cb8;
-    width: 100vw;
+    text-align: left;
+    margin-top: 1em;
+    label {
+      padding-left: 0.5em;
+    }
+  }
+  ::v-deep input {
+    background-color: #4e4cb8;
+    color: #bdb8b8c0;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #fff;
+    font-size: 1.2em;
+    padding: 0.8em;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .company {
+    display: grid;
+    grid-template-areas: repeat(2, 1fr);
+    grid-template-rows: 30% 70%;
+    grid-template-areas:
+      "name name"
+      "details chart";
+    &__name {
+      grid-area: name;
+      text-align: left;
+    }
+    &__details {
+      grid-area: details;
+      margin: 1em auto;
+    }
+    &__chart {
+      grid-area: chart;
+    }
   }
 }
 </style>
