@@ -8,29 +8,29 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/companies",
+    path: "/",
     name: "Companies",
-    component: CompaniesList
+    component: CompaniesList,
   },
   {
-    path: "/companies/:id",
+    path: "/:id",
     name: "Company",
     component: TheCompany,
     beforeEnter: (to, from, next) => {
       to.params.id.length > 3 ? next({ name: "Companies" }) : next();
-    }
+    },
   },
   {
     path: "/companies/*",
     redirect: "/companies",
-    component: CompaniesList
-  }
+    component: CompaniesList,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

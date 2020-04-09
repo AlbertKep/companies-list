@@ -12,7 +12,7 @@
         tag="li"
         v-for="company in paginationCompanies"
         :key="company.id"
-        :to="`/companies/${company.id}`"
+        :to="`/${company.id}`"
         class="companies-list-container__item"
       >
         <span>{{ company.id }}</span

@@ -1,15 +1,24 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersist from "vuex-persist";
+
 import axios from "axios";
 
 Vue.use(Vuex);
-
+const vuexLocalStorage = new VuexPersist({
+  key: "vuex",
+  storage: window.localStorage,
+  reducer: (state) => ({
+    keepCompanies: state.company,
+  }),
+});
 export const store = new Vuex.Store({
   state: {
     companies: [],
     incomes: [],
     filteredCompanies: [],
-    searchCompany: ""
+    searchCompany: "",
+    company: [],
   },
   mutations: {
     getCompanies(state, payload) {
@@ -18,7 +27,10 @@ export const store = new Vuex.Store({
     },
     searchCompany(state, payload) {
       state.searchCompany = payload;
-    }
+    },
+    getCompany(state, payload) {
+      state.company = payload;
+    },
   },
   actions: {
     getCompanies({ commit }) {
@@ -28,13 +40,13 @@ export const store = new Vuex.Store({
 
       axios
         .get("https://recruitment.hal.skygate.io/companies")
-        .then(response => {
-          response.data.forEach(company => {
+        .then((response) => {
+          response.data.forEach((company) => {
             companies.push({
               id: company.id,
               name: company.name,
               city: company.city,
-              incomes: []
+              incomes: [],
             });
             requests.push(
               axios.get(
@@ -45,14 +57,14 @@ export const store = new Vuex.Store({
 
           return axios.all(requests);
         })
-        .then(responses => {
-          responses.forEach(response => {
+        .then((responses) => {
+          responses.forEach((response) => {
             incomes.push(response.data);
           });
-          incomes.forEach(el => {
+          incomes.forEach((el) => {
             el.totalIncome = 0;
             el.averageIncome = 0;
-            el.incomes.map(income => {
+            el.incomes.map((income) => {
               el.totalIncome += parseInt(income.value);
               el.averageIncome += parseInt(income.value) / incomes.length;
             });
@@ -63,7 +75,7 @@ export const store = new Vuex.Store({
           for (let i = 0; i < companies.length; i++) {
             mergeCompaniesAndIncomes.push({
               ...companies[i],
-              ...incomes.find(income => income.id === companies[i].id)
+              ...incomes.find((income) => income.id === companies[i].id),
             });
           }
 
@@ -72,8 +84,12 @@ export const store = new Vuex.Store({
     },
     searchCompany({ commit }, payload) {
       commit("searchCompany", payload);
-    }
+    },
+    getCompany({ commit }, payload) {
+      commit("getCompany", payload);
+    },
   },
+  plugins: [vuexLocalStorage.plugin],
   getters: {
     sortCompaniesDescending(state) {
       return state.companies.sort((companyOne, companyTwo) => {
@@ -84,12 +100,12 @@ export const store = new Vuex.Store({
       if (!state.searchCompany) {
         return getters.sortCompaniesDescending;
       } else {
-        return getters.sortCompaniesDescending.filter(company => {
+        return getters.sortCompaniesDescending.filter((company) => {
           return company.name
             .toLowerCase()
             .includes(state.searchCompany.toLowerCase());
         });
       }
-    }
-  }
+    },
+  },
 });
