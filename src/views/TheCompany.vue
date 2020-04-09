@@ -14,19 +14,19 @@ export default {
   data() {
     return {
       companyShow: false,
-      company: {},
+      company: {}
     };
   },
   components: {
     "company-details": CompanyDetails,
-    "company-chart": Chart,
+    "company-chart": Chart
   },
   watch: {
-    $route: ["fetchData"],
+    $route: ["fetchData"]
   },
   methods: {
     fetchData() {
-      this.$store.getters.filteredCompanies.forEach((company) => {
+      this.$store.getters.filteredCompanies.forEach(company => {
         if (company.id == this.$route.params.id) {
           this.company = company;
           this.$store.dispatch("getCompany", this.company);
@@ -35,20 +35,20 @@ export default {
       this.sortIncomesDates();
     },
     getCompanyFromLocalStorage() {
-      this.company = JSON.parse(localStorage.getItem("vuex")).keepCompanies;
+      this.company = JSON.parse(localStorage.getItem("vuex")).keepCompany;
     },
     sortIncomesDates() {
       this.company.incomes.sort((dateOne, dateTwo) => {
         return Date.parse(dateOne.date) - Date.parse(dateTwo.date);
       });
-    },
+    }
   },
   created() {
     if (this.$store) {
       this.getCompanyFromLocalStorage();
     }
     this.fetchData();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

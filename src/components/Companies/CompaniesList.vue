@@ -1,48 +1,52 @@
 <template>
   <div class="companies-list-container">
-    {{ companiesLength }}
-    <div class="companies-list-container__properties">
-      <span>ID</span>
-      <span>Name</span>
-      <span>City</span>
-      <span>Total Income</span>
-    </div>
-    <ul class="companies-list-container__items">
-      <router-link
-        tag="li"
-        v-for="company in paginationCompanies"
-        :key="company.id"
-        :to="`/${company.id}`"
-        class="companies-list-container__item"
-      >
-        <span>{{ company.id }}</span
-        ><span>{{ company.name }}</span
-        ><span>{{ company.city }}</span
-        ><span>{{ company.totalIncome }}</span>
-      </router-link>
-    </ul>
-    <div class="pagination-container">
-      <button
-        @click="prevPage"
-        :disabled="prevButtonDisabled"
-        class="pagination-container__button"
-        :class="{ disabled: prevButtonDisabled }"
-      >
-        Prev
-      </button>
+    <app-loading v-if="isLoading"></app-loading>
+    <div v-if="isFetched" class="is-fetched-container">
+      <div class="companies-list-container__properties">
+        <span>ID</span>
+        <span>Name</span>
+        <span>City</span>
+        <span>Total Income</span>
+      </div>
+      <ul class="companies-list-container__items">
+        <router-link
+          tag="li"
+          v-for="company in paginationCompanies"
+          :key="company.id"
+          :to="`/${company.id}`"
+          class="companies-list-container__item"
+        >
+          <span>{{ company.id }}</span
+          ><span>{{ company.name }}</span
+          ><span>{{ company.city }}</span
+          ><span>{{ company.totalIncome }}</span>
+        </router-link>
+      </ul>
+      <div class="pagination-container">
+        <button
+          @click="prevPage"
+          :disabled="prevButtonDisabled"
+          class="pagination-container__button"
+          :class="{ disabled: prevButtonDisabled }"
+        >
+          Prev
+        </button>
 
-      <button
-        @click="nextPage"
-        :disabled="nextButtonDisabled"
-        class="pagination-container__button"
-        :class="{ disabled: nextButtonDisabled }"
-      >
-        Next
-      </button>
+        <button
+          @click="nextPage"
+          :disabled="nextButtonDisabled"
+          class="pagination-container__button"
+          :class="{ disabled: nextButtonDisabled }"
+        >
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import Loading from "@/components/Loading";
+
 export default {
   data() {
     return {
@@ -52,7 +56,16 @@ export default {
       nextButtonDisabled: false
     };
   },
+  components: {
+    "app-loading": Loading
+  },
   computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    isFetched() {
+      return this.$store.state.isFetched;
+    },
     companies() {
       return this.$store.getters.filteredCompanies;
     },
@@ -127,7 +140,7 @@ export default {
     padding: 1em 0;
     display: block;
     border-bottom: 2px solid #fff;
-    font-size: 0.5em;
+    font-size: 0.6em;
   }
 }
 .pagination-container {

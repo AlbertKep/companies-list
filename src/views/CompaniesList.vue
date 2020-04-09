@@ -1,6 +1,5 @@
 <template>
   <div class="companies-list">
-    <app-loading></app-loading>
     <app-header></app-header>
     <app-searcher></app-searcher>
     <companies-list></companies-list>
@@ -8,8 +7,6 @@
 </template>
 
 <script>
-import Loading from "@/components/Loading";
-
 import Header from "@/components/Companies/TheHeader.vue";
 import Searcher from "@/components/Companies/Searcher.vue";
 import CompaniesList from "@/components/Companies/CompaniesList.vue";
@@ -17,7 +14,6 @@ import CompaniesList from "@/components/Companies/CompaniesList.vue";
 export default {
   name: "Companies",
   components: {
-    "app-loading": Loading,
     "app-header": Header,
     "app-searcher": Searcher,
     "companies-list": CompaniesList
