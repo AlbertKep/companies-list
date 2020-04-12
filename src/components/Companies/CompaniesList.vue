@@ -144,6 +144,8 @@ export default {
   }
 }
 .pagination-container {
+  width: 100%;
+
   margin-top: 1em;
   position: fixed;
   bottom: 1.5em;
@@ -191,7 +193,7 @@ export default {
       font-size: 1.2em;
     }
     &__item span {
-      font-size: 0.9em;
+      font-size: 0.8em;
     }
   }
   .pagination-container {

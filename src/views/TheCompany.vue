@@ -55,15 +55,18 @@ export default {
 .company {
   height: 100vh;
   background: #4e4cb8;
+  display: grid;
   &__name {
-    padding: 2em 1em;
+    padding: 1em 1em 0;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .company {
     display: grid;
-    grid-template-areas: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 35% 60%;
+
     grid-template-rows: 30% 70%;
     grid-template-areas:
       "name name"

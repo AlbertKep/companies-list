@@ -39,25 +39,25 @@ export default {
     return {
       dates: {
         start: new Date(),
-        end: new Date(),
+        end: new Date()
       },
       selectedRange: [],
-      limitedTotalIncome: 0,
+      limitedTotalIncome: 0
     };
   },
   props: ["company"],
   components: {
-    "v-date-picker": DatePicker,
+    "v-date-picker": DatePicker
   },
   watch: {
-    dates: "sliceIncome",
+    dates: "sliceIncome"
   },
   computed: {
     totalIncome() {
       if (this.selectedRange.length === 0) {
         return this.company.totalIncome;
       } else {
-        this.selectedRange.map((income) => {
+        this.selectedRange.map(income => {
           this.limitedTotalIncome += parseInt(income.value);
         });
         return this.limitedTotalIncome;
@@ -69,7 +69,7 @@ export default {
       } else {
         return Math.floor(this.totalIncome / this.selectedRange.length);
       }
-    },
+    }
   },
   methods: {
     selectRange() {
@@ -79,7 +79,7 @@ export default {
     },
     sliceIncome() {
       this.limitedTotalIncome = 0;
-      this.selectedRange = this.company.incomes.filter((income) => {
+      this.selectedRange = this.company.incomes.filter(income => {
         return (
           Date.parse(income.date) >= Date.parse(this.dates.start) &&
           Date.parse(income.date) <= Date.parse(this.dates.end)
@@ -87,12 +87,12 @@ export default {
       });
 
       return this.selectedRange;
-    },
+    }
   },
   created() {
     this.sliceIncome();
     this.selectRange();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -102,7 +102,7 @@ export default {
     margin: auto;
   }
   &__details > p {
-    font-size: 1.2em;
+    font-size: 1em;
     padding: 0.6em;
     text-align: left;
     border-bottom: 1px solid #fff;
@@ -123,7 +123,7 @@ export default {
       border: none;
       border-radius: 0;
       border-bottom: 1px solid #fff;
-      font-size: 1.2em;
+      font-size: 1em;
       padding: 0.8em;
     }
   }
