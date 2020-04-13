@@ -20,21 +20,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .loading-container {
-  height: 70vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   &__title {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   &__dots {
     display: flex;
     align-content: space-between;
   }
   &__dot {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1em;
+    height: 1em;
     background-color: #fff;
     border-radius: 50%;
     margin: 0.5em;
@@ -49,12 +49,17 @@ export default {
     animation: bounce 1.5s infinite;
   }
 }
-// .bounce-enter-active {
-//   animation: bounce 3s infinite;
-// }
-// .bounce-leave-active {
-//   animation: bounce 1s infinite;
-// }
+@media only screen and (min-width: 768px) {
+  .loading-container {
+    &__title {
+      font-size: 2em;
+    }
+    &__dot {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
 @keyframes bounce {
   0% {
     transform: scale(0);

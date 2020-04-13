@@ -43,7 +43,6 @@ export default {
       companyChart.data.datasets.forEach(dataset => {
         dataset.data = Object.values(companyData);
       });
-      // companyChart.update();
     },
     createChart(chartId, chartData) {
       const ctx = document.getElementById(chartId);
@@ -63,15 +62,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .company__chart {
-//   position: relative;
-//   margin: auto;
-//   width: 60vw;
-//   height: 30vh;
-// }
+.company__chart {
+  width: 100vw;
+  height: 45vh;
+}
 @media only screen and (min-width: 768px) {
   .company__chart {
-    margin: 2em 0;
+    margin: 2em;
+    width: 60vw;
   }
 }
 </style>

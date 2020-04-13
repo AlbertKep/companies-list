@@ -21,7 +21,8 @@
       <v-date-picker
         v-model="dates"
         :value="dates"
-        is-dark
+        :min-date="disabledMinDate()"
+        :max-date="disabledMaxDate()"
         mode="range"
         color="purple"
         :masks="{ input: 'DD/MM/YY' }"
@@ -80,6 +81,8 @@ export default {
     sliceIncome() {
       this.limitedTotalIncome = 0;
       this.selectedRange = this.company.incomes.filter(income => {
+        // console.log(Date.parse(income.date));
+
         return (
           Date.parse(income.date) >= Date.parse(this.dates.start) &&
           Date.parse(income.date) <= Date.parse(this.dates.end)
@@ -87,6 +90,12 @@ export default {
       });
 
       return this.selectedRange;
+    },
+    disabledMinDate() {
+      return Date.parse(this.company.incomes[0].date) - 1;
+    },
+    disabledMaxDate() {
+      return Date.parse(this.company.incomes[49].date) + 1;
     }
   },
   created() {
