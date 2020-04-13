@@ -1,29 +1,28 @@
-# companies-list
+# Companies List App
 
-## Project setup
-```
-npm install
-```
+Live: link
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Description
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Application used to fetch and display a list of companies. After the selected company, the application redirects to the view with its
+detailed data like a city, total income or monthly income in the form of a chart.
 
-### Run your tests
-```
-npm run test
-```
+### Technologies and extra packages
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Vue,
+- vuex,
+- vue-router,
+- axios,
+- vuex-persist,
+- v-calendar,
+- chart.js
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Setup
+
+To run this application, install it locally using npm:
+
+```
+$ cd ../companies-list
+$ npm install
+$ npm run serve
+```
