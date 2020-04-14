@@ -65,6 +65,7 @@ export default {
 .company__chart {
   width: 100vw;
   height: 45vh;
+  background-color: #4e4cb8;
 }
 @media only screen and (min-width: 768px) {
   .company__chart {
