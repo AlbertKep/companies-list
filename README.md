@@ -1,6 +1,6 @@
 # Companies List App
 
-Live: link
+Live: https://companies-list.netlify.com/
 
 ## Description
 
