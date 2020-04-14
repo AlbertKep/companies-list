@@ -112,6 +112,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .companies-list-container {
+  background-color: #4e4cb8;
+  box-sizing: border-box;
   padding: 2em;
   &__properties {
     display: grid;
@@ -147,10 +149,7 @@ export default {
   width: 100%;
 
   margin-top: 1em;
-  position: fixed;
-  bottom: 1.5em;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
   &__button {
     background: #4e4cb8;
     color: #fff;
@@ -197,6 +196,7 @@ export default {
     }
   }
   .pagination-container {
+    // padding: 1em;
     &__button {
       font-size: 1em;
     }

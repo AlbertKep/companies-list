@@ -30,10 +30,12 @@
         class="company__date-picker"
       ></v-date-picker>
     </div>
+    <home-button></home-button>
   </div>
 </template>
 <script>
 import DatePicker from "v-calendar/lib/components/date-picker.umd";
+import HomeButton from "./TheHomeButton";
 
 export default {
   data() {
@@ -48,7 +50,8 @@ export default {
   },
   props: ["company"],
   components: {
-    "v-date-picker": DatePicker
+    "v-date-picker": DatePicker,
+    "home-button": HomeButton
   },
   watch: {
     dates: "sliceIncome"

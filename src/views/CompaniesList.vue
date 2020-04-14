@@ -1,25 +1,22 @@
 <template>
   <div class="companies-list">
     <app-header></app-header>
-    <app-searcher></app-searcher>
+    <app-search></app-search>
     <companies-list></companies-list>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Companies/TheHeader.vue";
-import Searcher from "@/components/Companies/Searcher.vue";
+import Search from "@/components/Companies/Search.vue";
 import CompaniesList from "@/components/Companies/CompaniesList.vue";
 
 export default {
   name: "Companies",
   components: {
     "app-header": Header,
-    "app-searcher": Searcher,
+    "app-search": Search,
     "companies-list": CompaniesList
-  },
-  data() {
-    return {};
   }
 };
 </script>
